@@ -15,7 +15,7 @@
     <div class="container">
         <div class="bd-example">
             <div class="mb-3" style="margin-top: 100px">
-                <input class="form-control" id="exampleFormControlInput1" placeholder="Search movies...">
+                <input class="form-control" id="movieSearch" placeholder="Search movies...">
             </div>
             <div class="d-grid gap-2 d-md-block">
                 <button class="btn button-custom" type="button" active>Button</button>
@@ -24,7 +24,7 @@
             </div>
             {% if movieData %} 
                 {% for item in movieData %}
-                    <div class="media">
+                    <div class="media" id="movie-{{ loop.index }}" name="{{ item["title"].lower() }}"> <!-- convert to lowercase so easier to search-->
                         <img src="{{item["poster"]}}" width="150" class="mr-3" alt="...">
                         <div class="media-body">
                         <h5 class="mt-0">{{ item["title"] }}</h5>
