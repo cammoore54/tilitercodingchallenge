@@ -18,17 +18,17 @@
                 <input class="form-control" id="movieSearch" placeholder="Search movies...">
             </div>
             <div class="d-grid gap-2 d-md-block">
-                <button class="btn button-custom" type="button" active>Button</button>
-                <button class="btn button-custom" type="button">Button</button>
-                <button class="btn button-custom" type="button">Button</button>
+                <button class="btn button-custom active" type="button" id="arclight-button">ARCLIGHT</button>
+                <button class="btn button-custom" type="button" id="pacific-theatres-button">PACIFIC THEATRES</button>
+                <button class="btn button-custom" type="button" id="amc-button">AMC</button>
             </div>
             {% if movieData %} 
                 {% for item in movieData %}
-                    <div class="media" id="movie-{{ loop.index }}" name="{{ item["title"].lower() }}"> <!-- convert to lowercase so easier to search-->
+                    <div class="media" id="{{ item["id"] }}" name="{{ item["title"].lower() }}"> <!-- convert to lowercase so easier to search-->
                         <img src="{{item["poster"]}}" width="150" class="mr-3" alt="...">
                         <div class="media-body">
                         <h5 class="mt-0">{{ item["title"] }}</h5>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        <span id = "{{ item["id"] }}-times">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
                         </div>
                     </div>
                 {% endfor %}
