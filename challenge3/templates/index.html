@@ -14,22 +14,22 @@
   <body>
     <div class="container">
         <div class="bd-example">
-            <div class="mb-3" style="margin-top: 100px">
+            <div class="mb-3 col-md-8 mx-auto" style="margin-top: 100px; padding: 0px;">
                 <input class="form-control" id="movieSearch" placeholder="Search movies...">
             </div>
 
 
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-secondary  button-custom"> 
-                  <input type="radio" name="options" id="arclight-button" autocomplete="off" > ARCLIGHT
+            <div class="btn-group btn-group-toggle col-md-8 mx-auto" data-toggle="buttons" style="display: flex;">
+                <label class="btn btn-secondary button-custom"> 
+                  <input type="radio" name="options" id="arclight-button" autocomplete="off" >ARCLIGHT
                 </label>
                 <label class="btn btn-secondary button-custom">
-                  <input type="radio" name="options" id="pacific-theatres-button" autocomplete="off"> PACIFIC THEATRES
+                  <input type="radio" name="options" id="pacific-theatres-button" autocomplete="off">PACIFIC THEATRES
                 </label>
                 <label class="btn btn-secondary button-custom">
-                  <input type="radio" name="options" id="amc-button" autocomplete="off"> AMC
+                  <input type="radio" name="options" id="amc-button" autocomplete="off">AMC
                 </label>
-              </div>
+            </div>
 
 
             <!-- <div class="d-grid gap-2 d-md-block">
@@ -37,17 +37,24 @@
                 <button class="btn button-custom" type="button" id="pacific-theatres-button">PACIFIC THEATRES</button>
                 <button class="btn button-custom" type="button" id="amc-button">AMC</button>
             </div> -->
+
+            <div class="card col-md-8 mx-auto" style="margin-top:20px;">
+                <div class="card-body">
+
             {% if movieData %} 
                 {% for item in movieData %}
                     <div class="media" id="{{ item["id"] }}" name="{{ item["title"].lower() }}" style="margin-top: 20px"> <!-- convert to lowercase so easier to search-->
-                        <img src="{{item["poster"]}}" width="150" class="mr-3" alt="...">
-                        <div class="media-body" style="margin-top:40px">
-                            <h3 class="mt-0" style="display: inline;">{{ item["title"] }}</h3> <h6 style="display: inline; color: #7A787A">(A)</h6>
-                        <span id = "{{ item["id"] }}-times" style="display: block"></span>
+                        <img src="{{item["poster"]}}" width="150" class="mr-3" style="box-shadow: 0px 5px 5px grey;">
+                        <div class="media-body" style="margin-top:30px; margin-left: 30px">
+                            <h3 class="mt-0" style="display: inline;">{{ item["title"] }}</h3> <h6 style="display: inline; color: #7A787A">({{item["rating"]}})</h6>
+                        <span id = "{{ item["id"] }}-times" style="display: block;"></span>
                         </div>
                     </div>
                 {% endfor %}
             {% endif %}
+
+                </div>
+            </div>
         </div>
     </div>
 

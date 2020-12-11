@@ -35,3 +35,39 @@ input:checked {
     border-radius: 0px;
     color: #656356;
 }
+
+@media(max-width: 480px){
+    .btn-group {
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        -ms-flex-pack: center;
+        justify-content: center;
+        position: relative;
+        vertical-align: middle;
+        width: 100%;
+        display: flex;
+    }
+    .btn {
+        width: 100%;
+    }
+  }
+
+
+  /* .btn-group-vertical {
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+
+.btn-group, .btn-group-vertical {
+    position: relative;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    vertical-align: middle;
+} */
