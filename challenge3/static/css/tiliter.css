@@ -3,7 +3,7 @@ body {
   }
 
 .button-custom {
-    background-color: transparent; /* Green */
+    background-color: transparent !important; /* Green */
     border: none;
     color: #656356;
     padding: 15px 32px;
@@ -19,4 +19,19 @@ body {
     box-shadow: none;
     border-radius: 0px;
 
+}
+
+input:checked {
+    border-bottom: 3px solid #FA8B3A !important;
+    outline: none;
+    box-shadow: none;
+    border-radius: 0px;
+  }
+
+.button-custom:not(:disabled):not(.disabled).active {
+    border-bottom: 3px solid #FA8B3A !important;
+    outline: none;
+    box-shadow: none;
+    border-radius: 0px;
+    color: #656356;
 }

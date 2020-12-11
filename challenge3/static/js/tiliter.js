@@ -9,21 +9,6 @@ let movieListDictTotal = [];
 
 $(document).ready(function(){
 
-    $("#arclight-button").focus()
-    $("#arclight-button").click()
-    $("#arclight-button").click(function(){
-        getShowTimes('Arclight')
-
-    }); 
-    $("#pacific-theatres-button").click(function(){
-        getShowTimes('Pacific Theatres')
-
-    }); 
-    $("#amc-button").click(function(){
-        getShowTimes('AMC')
-
-    }); 
-
     $( ".media" ).each(function(idx, el){
 
         movieListTotal.push($( this ).attr("name"))
@@ -33,33 +18,78 @@ $(document).ready(function(){
         });
     })
 
+
+    $("#arclight-button").change(function(){
+        getShowTimes('Arclight')
+        let input = $('#movieSearch').val()
+        filterMovieList(input)
+    });
+    // $("#arclight-button").focus()
+
+
+    // $("#arclight-button").click(function(){
+    //     getShowTimes('Arclight')
+    //     let input = $('#movieSearch').val()
+    //     filterMovieList(input)
+    // }); 
+    $("#arclight-button").trigger('click')
+
+    $("#pacific-theatres-button").change(function(){
+        getShowTimes('Pacific Theatres')
+        let input = $('#movieSearch').val()
+        filterMovieList(input)
+
+    }); 
+    $("#amc-button").change(function(){
+        getShowTimes('AMC')
+        let input = $('#movieSearch').val()
+        filterMovieList(input)
+
+    }); 
+
+
+
     $( "#movieSearch" ).keyup(function() {
         let input = $(this).val().toLowerCase()
 
-        let filteredList = theatreMovieList.filter(element => element.includes(input));
-        if (filteredList.length == 0){
-            for (let i=0; i < theatreMovieListDict.length; i++){
-                $("#"+ theatreMovieListDict[i]["id"]).hide()
-            }
-        }
-        else{
-            for (let i=0; i < theatreMovieListDict.length; i++){
-                for (let j=0; j < filteredList.length; j++){
-                    if (theatreMovieListDict[i]["name"]  == filteredList[j]){
-                        $("#"+ theatreMovieListDict[i]["id"]).show()
-                        break;
-                    }
-                    else{
-                        $("#"+ theatreMovieListDict[i]["id"]).hide()
-                    }
-                }
-            }
-        }
+        filterMovieList(input)
 
-        console.log(movieList.filter(element => element.includes(input) ) );
+
+        // console.log(movieList.filter(element => element.includes(input) ) );
       });
 
 });
+
+function arclightButtonClicked(){
+    getShowTimes('Arclight')
+    let input = $('#movieSearch').val()
+    filterMovieList(input)
+}
+
+
+function filterMovieList(input){
+
+    let filteredList = theatreMovieList.filter(element => element.includes(input));
+    if (filteredList.length == 0){
+        for (let i=0; i < theatreMovieListDict.length; i++){
+            $("#"+ theatreMovieListDict[i]["id"]).hide()
+        }
+    }
+    else{
+        for (let i=0; i < theatreMovieListDict.length; i++){
+            for (let j=0; j < filteredList.length; j++){
+                if (theatreMovieListDict[i]["name"]  == filteredList[j]){
+                    $("#"+ theatreMovieListDict[i]["id"]).show()
+                    break;
+                }
+                else{
+                    $("#"+ theatreMovieListDict[i]["id"]).hide()
+                }
+            }
+        }
+    }
+
+}
 
 function getMovieList(showTimes){
     let movieList = [];
@@ -99,6 +129,7 @@ function getShowTimes(theatre){
     $.ajax({
         url: '/get-show-times/'+ theatre,
         type: 'POST',
+        async: false,
         success: function(result) {
             
             let showTimes = result;
