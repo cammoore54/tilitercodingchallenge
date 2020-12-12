@@ -1,31 +1,48 @@
 """
+    This applicaiton is for coding challenge 3.1. It uses a python flask server to serve a simple web app
+    that allows user to search for the session times of a movie, based on the theatre and movie title.
 
-    This applicaiton is for coding challenge 3.1. It uses a python flask server to serve a simple search bar applcation
+    The path to the json files are in config.json
+
+    Modules used:
+    flask: Webserver
+    json: parse movie data
 """
-
 
 from flask import Flask, render_template, jsonify
 import json
 app = Flask(__name__)
 
+with open('config.json') as configFile:
+    config = json.load(configFile)
+
 @app.route('/')
 def index():
-    with open('data/movie_metadata.json') as jsonFile:
-        movieData = json.load(jsonFile)
-    #     movieData = {'movieData': movieData}
-    with open('data/theater_showtimes.json') as jsonFile:
-        showTimes = json.load(jsonFile)
-        # showTimes = {'showTimes': showTimes}
-    # movieData.update(showTimes)
+    """ Default route when user visits web page
+        Gets path of movie meta data json file config and renders template of index page
 
-    return render_template('index.html', movieData=movieData, showTimes=showTimes)
+    Returns:
+        html: index.html
+    """
+    with open(config["movieMetadataPath"]) as jsonFile:
+        movieData = json.load(jsonFile)
+    return render_template('index.html', movieData=movieData)
 
 @app.route('/get-show-times/<theatre>', methods = ['POST'])
 def getShowTimes(theatre):
-    with open('data/theater_showtimes.json') as jsonFile:
+    """ POST request route to get showtime list
+
+    Returns:
+        json: showtime list
+
+    """
+    with open(config["theatreShowtimesPath"]) as jsonFile:
         showTimeList = json.load(jsonFile)
+
     for theatreNames in showTimeList:
         if theatreNames["name"] == theatre:
             return jsonify(theatreNames["showtimes"])
 
-app.run(debug=True,host='0.0.0.0')
+# Start application
+if __name__ == '__main__':
+    app.run(debug=True,host='0.0.0.0')

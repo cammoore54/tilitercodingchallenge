@@ -1,3 +1,9 @@
+<!-- 
+    This is the index page for challenge 3.1 of the tiliter candidate coding challenge
+
+    Author: Cameron Moore
+ -->
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,11 +20,12 @@
   <body>
     <div class="container">
         <div class="bd-example">
+            <!-- Movie title search form -->
             <div class="mb-3 col-md-8 mx-auto" style="margin-top: 100px; padding: 0px;">
                 <input class="form-control" id="movieSearch" placeholder="Search movies...">
             </div>
 
-
+            <!-- Theatre selection buttons -->
             <div class="btn-group btn-group-toggle col-md-8 mx-auto" data-toggle="buttons" style="display: flex;">
                 <label class="btn btn-secondary button-custom"> 
                   <input type="radio" name="options" id="arclight-button" autocomplete="off" >ARCLIGHT
@@ -31,34 +38,36 @@
                 </label>
             </div>
 
-
-            <!-- <div class="d-grid gap-2 d-md-block">
-                <button class="btn button-custom active" type="button" id="arclight-button">ARCLIGHT</button>
-                <button class="btn button-custom" type="button" id="pacific-theatres-button">PACIFIC THEATRES</button>
-                <button class="btn button-custom" type="button" id="amc-button">AMC</button>
-            </div> -->
-
+            <!-- Movie poster, title, rating and session time display -->
             <div class="card col-md-8 mx-auto" style="margin-top:20px;">
                 <div class="card-body">
-
-            {% if movieData %} 
-                {% for item in movieData %}
-                    <div class="media" id="{{ item["id"] }}" name="{{ item["title"].lower() }}" style="margin-top: 20px"> <!-- convert to lowercase so easier to search-->
-                        <img src="{{item["poster"]}}" width="150" class="mr-3" style="box-shadow: 0px 5px 5px grey;">
-                        <div class="media-body" style="margin-top:30px; margin-left: 30px">
-                            <h3 class="mt-0" style="display: inline;">{{ item["title"] }}</h3> <h6 style="display: inline; color: #7A787A">({{item["rating"]}})</h6>
-                        <span id = "{{ item["id"] }}-times" style="display: block;"></span>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endif %}
-
+                    <!-- Movie data from flask server -->
+                    {% if movieData %} 
+                        {% for item in movieData %}
+                            
+                            <div class="media" id="{{ item["id"] }}" name="{{ item["title"].lower() }}" style="margin-top: 20px"> <!-- convert to lowercase so easier to search-->
+                                <!-- Movie poster -->
+                                <div class="row" style="width: 100%;">
+                                    <div class="col-md-3 col-sm-12">
+                                        <img src="{{item["poster"]}}" width="150" class="mr-3" style="box-shadow: 0px 5px 5px grey;">
+                                    </div>
+                                    <!-- <div class="col-md-6 col-sm-12"> -->
+                                    <div class="media-body col-md-9 col-sm-12" style="margin-top:30px; margin-left: 30px">
+                                        <!-- Session times -->
+                                        <h3 class="mt-0" style="display: inline;">{{ item["title"] }}</h3> <h6 style="display: inline; color: #7A787A">({{item["rating"]}})</h6>
+                                        <span id = "{{ item["id"] }}-times" style="display: block;"></span>
+                                    </div>
+                                <!-- </div> -->
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- Required packages for bootstrap and jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

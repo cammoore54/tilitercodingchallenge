@@ -1,0 +1,4 @@
+{
+    "movieMetadataPath": "data/movie_metadata.json",
+    "theatreShowtimesPath": "data/theater_showtimes.json"
+}

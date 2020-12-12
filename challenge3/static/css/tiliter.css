@@ -1,9 +1,13 @@
+/**
+*  Styling sheet for web page
+*/
+
 body {
     background-color: #F0F0F0;
   }
 
 .button-custom {
-    background-color: transparent !important; /* Green */
+    background-color: transparent !important;
     border: none;
     color: #656356;
     padding: 15px 32px;
@@ -11,6 +15,7 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    cursor:pointer;
 }
 
 .button-custom:focus{
@@ -36,6 +41,7 @@ input:checked {
     color: #656356;
 }
 
+/* Vertically stack button for mobile (copyed from bootstrap)*/ 
 @media(max-width: 480px){
     .btn-group {
         -ms-flex-direction: column;
@@ -51,23 +57,17 @@ input:checked {
     }
     .btn {
         width: 100%;
+        background-color: white !important;
+        margin-top: 5px;
+    }
+    .button-custom:not(:disabled):not(.disabled).active {
+        background-color: #FA8B3A !important;
+        outline: none;
+        box-shadow: none;
+        border-radius: 0px;
+        color: white;
+    }
+    .media-body{
+        margin: 10px 0px 0px 0px !important;
     }
   }
-
-
-  /* .btn-group-vertical {
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -ms-flex-align: start;
-    align-items: flex-start;
-    -ms-flex-pack: center;
-    justify-content: center;
-}
-
-
-.btn-group, .btn-group-vertical {
-    position: relative;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    vertical-align: middle;
-} */
