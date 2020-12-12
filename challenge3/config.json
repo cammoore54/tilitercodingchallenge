@@ -1,4 +1,6 @@
 {
     "movieMetadataPath": "data/movie_metadata.json",
-    "theatreShowtimesPath": "data/theater_showtimes.json"
+    "theatreShowtimesPath": "data/theater_showtimes.json",
+    "uploadPath": "uploads/",
+    "uploadExtensions": ".mp4"
 }

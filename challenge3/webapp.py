@@ -9,8 +9,10 @@
     json: parse movie data
 """
 
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
+from werkzeug.utils import secure_filename  #Stops malicious filenames
 import json
+import os
 app = Flask(__name__)
 
 with open('config.json') as configFile:
@@ -42,6 +44,23 @@ def getShowTimes(theatre):
     for theatreNames in showTimeList:
         if theatreNames["name"] == theatre:
             return jsonify(theatreNames["showtimes"])
+
+@app.route('/video-processing')
+def videoProcessing():
+
+    return render_template('video-processing.html')
+
+@app.route('/upload-files', methods=['POST'])
+def uploadFiles():
+    uploaded_file = request.files['file']
+    filename = secure_filename(uploaded_file.filename)
+    if filename != '':
+        file_ext = os.path.splitext(filename)[1]
+        if file_ext not in config['uploadExtensions']:
+            abort(400)
+        uploaded_file.save(os.path.join(config['uploadPath'], filename))
+    return redirect(url_for('index'))
+
 
 # Start application
 if __name__ == '__main__':

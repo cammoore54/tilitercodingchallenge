@@ -1,0 +1,17 @@
+
+
+{% extends "base.html" %}
+
+{%block challenge4 %}active{% endblock %}
+{% block content %}
+<div class="card col-md-8 mx-auto" style="margin-top:20px;">
+  <div class="card-body">
+<form>
+    <div class="form-group">
+      <label for="exampleFormControlFile1">Select video file</label>
+      <input type="file" class="form-control-file" id="uploadVideoButton" onchange="uploadVideo()">
+    </div>
+  </form>
+</div>
+</div>
+{% endblock %}

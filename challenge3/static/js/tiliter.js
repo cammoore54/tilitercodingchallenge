@@ -165,5 +165,23 @@ function getShowTimes(theatre){
             }
         }
     });
-      
+}
+
+
+function uploadVideo(){
+    let formData = new FormData();
+    let uploadedFile = $('#uploadVideoButton')[0].files[0]; //Get the one file
+    formData.append('file', uploadedFile)
+
+    $.ajax({
+        url: '/upload-files',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success:function(result){
+            console.log(result)
+
+        }
+    });
 }
