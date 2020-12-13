@@ -9,7 +9,7 @@
     json: parse movie data
 """
 
-from flask import Flask, render_template, jsonify, request, send_from_directory, url_for
+from flask import Flask, render_template, jsonify, request, send_from_directory, url_for, abort
 from werkzeug.utils import secure_filename  #Stops malicious filenames
 import json
 import os
@@ -85,17 +85,17 @@ def uploadFiles():
     if filename != '':
         file_ext = os.path.splitext(filename)[1]
         if file_ext not in config['uploadExtensions']:
-            abort(400)
+            jsonify({"status": "fail"})
         uploadedFile.save(config['tempUploadPath'])
     challenge4_1.saveFile(config,frameRate,frameWidth,frameHeight,colour)
     
     
-    return url_for('downloadFile', fileName=config["resizeProcessedFileName"], attachmentName = attachmentFileName)
+    return jsonify({"status": "success", "path": url_for('downloadFile', fileName=config["resizeProcessedFileName"], attachmentName = attachmentFileName)})
 
 
 @app.route('/background-removal', methods=['POST'])
 def backgroundRemoval():
-    """ Gets file and data to convert video for download
+    """ Processes video file
 
     """
     uploadedFile = request.files['file']
@@ -105,11 +105,11 @@ def backgroundRemoval():
     if filename != '':
         file_ext = os.path.splitext(filename)[1]
         if file_ext not in config['uploadExtensions']:
-            abort(400)
+            jsonify({"status": "fail"})
         uploadedFile.save(config['tempUploadPath'])
     challenge4_2.processVideo(config,algorithm)
     
-    return url_for('downloadFile', fileName=config["resizeProcessedFileName"], attachmentName = attachmentFileName)
+    return jsonify({"status": "success", "path": url_for('downloadFile', fileName=config["resizeProcessedFileName"], attachmentName = attachmentFileName)})
 
 
 @app.route('/download_processed_video/<path:fileName>/<path:attachmentName>')

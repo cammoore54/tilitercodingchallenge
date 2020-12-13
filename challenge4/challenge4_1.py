@@ -3,10 +3,6 @@ import cv2
 import argparse
 import time
 
-
-
-
-
 def changeResolution(frame, width, height):
     width = int(width)
     height = int(height)
