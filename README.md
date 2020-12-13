@@ -4,7 +4,7 @@ All challenges have been completed. I have created a Flask web application where
 
 ## Installation:
 Create fresh virtual environment and execute:
-`pip install requirements.txt`
+`pip install -r requirements.txt`
 
 ## Execution
 Execute: `python3 webapp.py` to run the web application. 
