@@ -9,10 +9,13 @@
     json: parse movie data
 """
 
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, send_from_directory, url_for
 from werkzeug.utils import secure_filename  #Stops malicious filenames
 import json
 import os
+import sys
+sys.path.insert(0,'..')
+from challenge4 import challenge4_1
 app = Flask(__name__)
 
 with open('config.json') as configFile:
@@ -52,15 +55,49 @@ def videoProcessing():
 
 @app.route('/upload-files', methods=['POST'])
 def uploadFiles():
-    uploaded_file = request.files['file']
-    filename = secure_filename(uploaded_file.filename)
+    """ Gets file and data to convert video for download
+
+    """
+    uploadedFile = request.files['file']
+    frameWidth = request.form['frameWidth']
+    if frameWidth == '':
+        frameWidth = False
+    else:
+        frameWidth = int(frameWidth)
+    frameHeight = request.form['frameHeight']
+    if frameHeight == '':
+        frameHeight = False
+    else:
+        frameHeight = int(frameHeight)
+    frameRate = request.form['frameRate']
+    if frameRate == '':
+        frameRate = 5
+    else:
+        frameRate = int(frameRate)
+    colour = request.form['colour']
+    if colour == 'true':
+        colour = True
+    else:
+        colour = False
+    
+    filename = secure_filename(uploadedFile.filename)
+    attachmentFileName = os.path.splitext(filename)[0] + "_processed.mp4"
     if filename != '':
         file_ext = os.path.splitext(filename)[1]
         if file_ext not in config['uploadExtensions']:
             abort(400)
-        uploaded_file.save(os.path.join(config['uploadPath'], filename))
-    return redirect(url_for('index'))
+        uploadedFile.save(config['tempUploadPath'])
+    challenge4_1.saveFile(config,frameRate,frameWidth,frameHeight,colour)
+    
+    
+    return url_for('downloadFile', fileName=config["resizeProcessedFileName"], attachmentName = attachmentFileName)
 
+
+@app.route('/download_processed_video/<path:fileName>/<path:attachmentName>')
+def downloadFile(fileName,attachmentName):
+
+    filePath = config["processedFilePath"]
+    return send_from_directory(filePath, fileName, as_attachment=True, mimetype='video/x-msvideo', attachment_filename=attachmentName)
 
 # Start application
 if __name__ == '__main__':
