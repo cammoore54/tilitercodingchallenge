@@ -174,7 +174,7 @@ def main(filePath,frameRate,width,height,monochrome):
 
 
 if __name__ == '__main__':
-    filePath = 'videos/video_1.mp4'
+    filePath = '../videos/video_1.mp4'
     frameRate = 20
     width = 400
     height = 200
