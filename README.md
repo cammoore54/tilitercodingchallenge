@@ -7,7 +7,8 @@ Create fresh virtual environment and execute:
 `pip install -r requirements.txt`
 
 ## Execution
-Execute: `python3 webapp.py` to run the web application. 
+`cd challenge`
+`python3 webapp.py`
 
 ### Challenge 4.1
 Challenge 4.1 can be run via the command line by: `python3 challenge4/challenge4_1.py` Use`python3 challenge4/challenge4_1.py -h` to view available command line arguments.
