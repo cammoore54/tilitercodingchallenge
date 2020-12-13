@@ -14,3 +14,5 @@ Challenge 4.1 can be run via the command line by: `python3 challenge4/challenge4
 
 ### Challenge 4.2
 Challenge 4.2 can be run via the command line by: `python3 challenge4/challenge4_2.py` Use`python3 challenge4/challenge4_2.py -h` to view available command line arguments.
+
+:egg: included
