@@ -7,7 +7,7 @@ Create fresh virtual environment and execute:
 `pip install -r requirements.txt`
 
 ## Execution
-`cd challenge`
+`cd challenge` \
 `python3 webapp.py`
 
 ### Challenge 4.1
