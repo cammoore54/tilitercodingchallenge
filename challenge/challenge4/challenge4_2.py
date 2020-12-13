@@ -51,7 +51,7 @@ def absDiffSubtraction(frame,firstFrame):
 
     return bitwiseAnd
 
-def processVideo(config, algorithm, filePath):
+def processVideo(config, algorithm, filePath=False):
     """
         Process video file
     Args:
@@ -100,8 +100,7 @@ def processVideo(config, algorithm, filePath):
 
 
 def main(filePath):
-    ap = argparse.ArgumentParser(description='This program shows how to use background subtraction methods provided by \
-                                              OpenCV.')
+    ap = argparse.ArgumentParser(description='This application performs background subtraction using opencv')
     ap.add_argument("-v", "--videopath", required=False, default=filePath, help="Path to video file")
     ap.add_argument("-a", "--algorithm", type=str, help='Background subtraction method (KNN, MOG2, ABSDIFF).', default='MOG2')
 

@@ -99,7 +99,7 @@ def main(filePath,frameRate,width,height,monochrome):
     """
 
     # Parse commandline arguments
-    ap = argparse.ArgumentParser()
+    ap = argparse.ArgumentParser(description="This application adjusts a video file's framerate, resolution and colour")
     ap.add_argument("-v", "--videopath", required=False, default=filePath, help="Path to video file")
     ap.add_argument("-f", "--framerate", required=False, default=frameRate, type=int, help="Framerate for video playback")
     ap.add_argument("-w", "--width", required=False, default=width, type=int, help="Width of video")
