@@ -1,8 +1,0 @@
-{
-    "movieMetadataPath": "data/movie_metadata.json",
-    "theatreShowtimesPath": "data/theater_showtimes.json",
-    "tempUploadPath": "uploads/video.mp4",
-    "processedFilePath": "processed/",
-    "resizeProcessedFileName": "video_processed.mp4",
-    "uploadExtensions": ".mp4"
-}

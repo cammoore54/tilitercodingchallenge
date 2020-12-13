@@ -1,0 +1,73 @@
+/**
+*  Styling sheet for web page
+*/
+
+body {
+    background-color: #F0F0F0;
+  }
+
+.button-custom {
+    background-color: transparent !important;
+    border: none;
+    color: #656356;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor:pointer;
+}
+
+.button-custom:focus{
+    border-bottom: 3px solid #FA8B3A !important;
+    outline: none;
+    box-shadow: none;
+    border-radius: 0px;
+
+}
+
+input:checked {
+    border-bottom: 3px solid #FA8B3A !important;
+    outline: none;
+    box-shadow: none;
+    border-radius: 0px;
+  }
+
+.button-custom:not(:disabled):not(.disabled).active {
+    border-bottom: 3px solid #FA8B3A !important;
+    outline: none;
+    box-shadow: none;
+    border-radius: 0px;
+    color: #656356;
+}
+
+/* Vertically stack button for mobile (copyed from bootstrap)*/ 
+@media(max-width: 480px){
+    .btn-group {
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        -ms-flex-pack: center;
+        justify-content: center;
+        position: relative;
+        vertical-align: middle;
+        width: 100%;
+        display: flex;
+    }
+    .btn {
+        width: 100%;
+        background-color: white !important;
+        margin-top: 5px;
+    }
+    .button-custom:not(:disabled):not(.disabled).active {
+        background-color: #FA8B3A !important;
+        outline: none;
+        box-shadow: none;
+        border-radius: 0px;
+        color: white;
+    }
+    .media-body{
+        margin: 10px 0px 0px 0px !important;
+    }
+  }
