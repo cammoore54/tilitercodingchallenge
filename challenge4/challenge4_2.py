@@ -1,9 +1,25 @@
+"""
+    Includes all functions to complete challenge 4.2
+
+    Modules used:
+    cv2: opencv - for image processing
+    argparse: commandline arguments from user
+    os: path manipulation 
+"""
+
 import cv2
 import argparse
 import os
 
-
 def backgroundSubtractionModel(frame,backSub):
+    """
+        Performs opencv background subtraction
+    Args:
+        frame: frame to process
+        backSub: background subtraction model
+    Returns: 
+        Segmented frame
+    """
     fgMask = backSub.apply(frame)
     fgMask = cv2.medianBlur(fgMask,7)
     bitwiseAnd = cv2.bitwise_and(frame, frame, mask=fgMask)
@@ -43,7 +59,7 @@ def processVideo(config, algorithm):
     frameHeight = int(cap.get(4))
     frameRate = cap.get(cv2.CAP_PROP_FPS)
     fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-    out = cv2.VideoWriter(config["processedFilePath"]+config["resizeProcessedFileName"],fourcc, frameRate, (frameWidth,frameHeight))
+    out = cv2.VideoWriter(config["processedFilePath"]+config["processedFileName"],fourcc, frameRate, (frameWidth,frameHeight))
     while True:
         ret, frame = cap.read()
         if not ret:
