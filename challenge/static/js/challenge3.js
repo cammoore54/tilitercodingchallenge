@@ -18,7 +18,8 @@ let movieListTotal = [];
 let movieListDictTotal = [];
 
 // Executes when page is fully loaded
-$(document).ready(function(){
+$(document).ready(function(){    
+    
 
     // Grab the movie title and id from all of the movies
     $( ".media" ).each(function(idx, el){
@@ -69,6 +70,14 @@ $(document).ready(function(){
  */
 function filterMovieList(input){
 
+    if (input == 'clippy'){
+        clippy.load('Clippy', function(agent){
+            agent.show();
+            agent.moveTo(500,500)
+            agent.speak("Cam would be a great fit at Tiliter!!!")
+            
+        });
+    }
     // Filters list of currently selected theatre with input of user
     let filteredList = theatreMovieList.filter(element => element.includes(input));
     // If no results, hide all elements
