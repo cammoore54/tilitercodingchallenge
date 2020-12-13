@@ -64,12 +64,45 @@
       </fieldset>
       <div class="form-group row">
         <div class="col-sm-10">
-          <button type="button" onclick="downloadFile()" id="DownloadButton" class="btn btn-primary">Download</button>
-          
+          <button type="button" onclick="downloadFile()" id="changeResButton" class="btn btn-primary">Process Video</button>
         </div>
       </div>
     </form>
+  </div>
+
+  <div id="challenge42Div">
+  <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm-2 pt-0">Background subtraction method</legend>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="MOG2Radio" value="option1" checked>
+          <label class="form-check-label" for="colourRadio">
+            MOG2
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="knnRadio" value="option2">
+          <label class="form-check-label" for="grayscaleRadio">
+            KNN
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="absdiffRadio" value="option2">
+          <label class="form-check-label" for="grayscaleRadio">
+            Absdiff
+          </label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="button" onclick="removeBackground()" id="removeBackgroundButton" class="btn btn-primary">Process Video</button>
+    </div>
+  </div>
 </div>
+  
 </div>
 </div>
 {% endblock %}

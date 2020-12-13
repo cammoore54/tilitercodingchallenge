@@ -15,7 +15,7 @@ import json
 import os
 import sys
 sys.path.insert(0,'..')
-from challenge4 import challenge4_1
+from challenge4 import challenge4_1, challenge4_2
 app = Flask(__name__)
 
 with open('config.json') as configFile:
@@ -89,6 +89,25 @@ def uploadFiles():
         uploadedFile.save(config['tempUploadPath'])
     challenge4_1.saveFile(config,frameRate,frameWidth,frameHeight,colour)
     
+    
+    return url_for('downloadFile', fileName=config["resizeProcessedFileName"], attachmentName = attachmentFileName)
+
+
+@app.route('/background-removal', methods=['POST'])
+def backgroundRemoval():
+    """ Gets file and data to convert video for download
+
+    """
+    uploadedFile = request.files['file']
+    algorithm = request.form['algorithm']
+    filename = secure_filename(uploadedFile.filename)
+    attachmentFileName = os.path.splitext(filename)[0] + "_processed.mp4"
+    if filename != '':
+        file_ext = os.path.splitext(filename)[1]
+        if file_ext not in config['uploadExtensions']:
+            abort(400)
+        uploadedFile.save(config['tempUploadPath'])
+    challenge4_2.processVideo(config,algorithm)
     
     return url_for('downloadFile', fileName=config["resizeProcessedFileName"], attachmentName = attachmentFileName)
 
