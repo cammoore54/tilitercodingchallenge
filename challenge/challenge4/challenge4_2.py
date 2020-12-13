@@ -99,28 +99,43 @@ def processVideo(config, algorithm, filePath=False):
     out.release()
 
 
-def main(filePath):
-    ap = argparse.ArgumentParser(description='This application performs background subtraction using opencv')
-    ap.add_argument("-v", "--videopath", required=False, default=filePath, help="Path to video file")
-    ap.add_argument("-a", "--algorithm", type=str, help='Background subtraction method (KNN, MOG2, ABSDIFF).', default='MOG2')
-
-    args = vars(ap.parse_args())
-    if "videopath" in args:
-        filePath = args['videopath']
-    if "algorithm" in args:
-        algorithm = args['algorithm']
-
-    rootDir = os.path.dirname(filePath)
-    fileName=os.path.basename(filePath)
+def fileNameConstructor(inputFilePath):
+    """
+        Appends '_processed' to filename
+    Args:
+        inputFilePath - file path to alter
+    """
+    rootDir = os.path.dirname(inputFilePath)
+    fileName=os.path.basename(inputFilePath)
     processedFileName = os.path.splitext(fileName)[0] + "_processed.mp4"
     processedFilePath = os.path.join(rootDir, processedFileName)
 
+    return processedFilePath
+
+
+def main(inputFilePath):
+    ap = argparse.ArgumentParser(description='This application performs background subtraction using opencv')
+    ap.add_argument("-i", "--inputvideopath", required=False, default=inputFilePath, help="Path to input video file")
+    ap.add_argument("-o", "--outputvideopath", required=False, default=fileNameConstructor(inputFilePath), help="Path to output video file")
+    ap.add_argument("-a", "--algorithm", type=str, help='Background subtraction method (KNN, MOG2, ABSDIFF).', default='MOG2')
+
+    args = vars(ap.parse_args())
+    if "inputvideopath" in args:
+        inputFilePath = args['inputvideopath']
+    if "algorithm" in args:
+        algorithm = args['algorithm']
+    if "outputvideopath" in args:
+        outputFilePath = args['outputvideopath']
+    else:
+        outputFilePath = fileNameConstructor(inputFilePath)
+
     with open('config.json') as configFile:
         config = json.load(configFile)
-    processVideo(config,algorithm,processedFilePath) 
+
+    processVideo(config,algorithm,outputFilePath) 
 
 
 
 if __name__ == '__main__':
-    filePath = '../videos/video_1.mp4'
-    main(filePath)
+    inputFilePath = '../videos/video_1.mp4'
+    main(inputFilePath)
